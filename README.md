@@ -1,2 +1,0 @@
-# blazorwasm-cookie-auth
-Placeholder
