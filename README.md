@@ -188,4 +188,8 @@ Install this package on `BlazorWASM.Backend` and `BlazorServer` projects:
 
    <img width="450" alt="image" src="https://github.com/affableashish/blazorwasm-cookie-auth/assets/30603497/ad687a37-25e6-43b5-8b63-5c519605be02">
 
-   
+#### Stop Redis after you're done with your testing
+Hit `^C` and run this command: `brew services stop redis`.
+
+<img width="650" alt="image" src="https://github.com/affableashish/blazorwasm-cookie-auth/assets/30603497/6b90cae9-4249-4a90-9cf3-3defa7e19aff">
+
