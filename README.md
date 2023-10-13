@@ -1,29 +1,29 @@
 # blazorwasm-cookie-auth
-Blazor WASM project that uses cookie authentication to authenticate users. It uses `.NET 8 RC2`.
-It also demonstrates how to do Single Sign On (SSO) using Cookie Authentication.
+This repo contains 2 different projects:
+1. Blazor Web App that uses WebAssembly components for interactivity (`BlazorWASM.Backend.csproj` + `BlazorWASM.Frontend.csproj`). Basically it's a hosted WebAssembly app with prerendering enabled (by default in .NET 8 RC2).
+2. Blazor Web App that uses SignalR for interactivity and runs on the server (`BlazorServer.csproj`). Basically a Blazor Server App.
+
+`BlazorWASM.Backend` uses AspNetCore Identity with cookie authentication to sign in and manage users.
+`BlazorServer` just sits alongside to demostrate Single Sign On (SSO).
+
+Any user who signs into `BlazorWASM.Backend` app gets automatically signed into `BlazorServer` app. Read on to see how it's done.
 
 ## Create a project
 1. Create a new repo in Github.
 2. Clone that into Rider.
    
    <img width="400" alt="image" src="https://github.com/affableashish/blazorwasm-cookie-auth/assets/30603497/d7006b57-f41d-4ac2-a126-bd78c35c5282">
-3. Open that folder in Finder. And copy the location.
-   
-   <img width="450" alt="image" src="https://github.com/affableashish/blazorwasm-cookie-auth/assets/30603497/ec28628f-eb2a-4d6b-b2ac-c061cc7d6bda">
 
-5. Go to Rider's Local Terminal and create the project.
-   
-   <img width="1000" alt="image" src="https://github.com/affableashish/blazorwasm-cookie-auth/assets/30603497/46d541a2-c4a4-4cf1-a383-694baf949349">
-
+3. Go to Rider's Local Terminal and create the project.
    ````
-   dotnet new blazor -int webassembly -au Individual -n BlazorWASM.Backend -o .
+   Ashishs-MacBook-Pro:blazorwasm-cookie-auth ashishkhanal$ dotnet new blazor -int webassembly -au Individual -n BlazorWASM.Backend -o .
    ````
    1. `-int webassembly` means create a new Blazor Web App with Webassembly hosting the interactive components.
    2. `-au Individual` means use Individual Authentication which uses AspNetCOre Identity.
    3. `-n BlazorWASM.Backend` means name the project as _BlazorWASM.Backend_. In this case the WASM project is served by a AspNetCore web app, that's why I named it as **Backend** (backend for frontend, frontend being WASM app).
    4. `-o .` means put the output of the command in the current folder.
 
-6. Rename the client project to just `BlazorWASM.Frontend`.
+4. Rename the client project to just `BlazorWASM.Frontend`.
    So first, find the usage of `BlazorWASM.Backend.Client`.
    
    <img width="750" alt="image" src="https://github.com/affableashish/blazorwasm-cookie-auth/assets/30603497/938ac03f-fe35-4f0e-97a7-e13e3728b9f2">
@@ -38,10 +38,10 @@ It also demonstrates how to do Single Sign On (SSO) using Cookie Authentication.
 
    Finally, change the project reference in `.sln` file, rename the project folder name and the project file name.
 
-7. Rename the `BlazorWASM.Backend.sln` file to just `BlazorWASM.sln`.
-8. The solution should look like this at this point and should build just fine.
-   
-   <img width="250" alt="image" src="https://github.com/affableashish/blazorwasm-cookie-auth/assets/30603497/8262876b-b71a-45a2-8727-70f6f66250ee">
+5. Rename the `BlazorWASM.Backend.sln` file to just `BlazorApps.sln`.
+6. The solution should look like this at this point and should build just fine.
+
+   <img width="250" alt="image" src="https://github.com/affableashish/blazorwasm-cookie-auth/assets/30603497/dbcef89f-2fe7-4c35-a79c-cdbc1ee1dc58">
 
 ## Run the project
 1. Select the Profile `BlazorWASM.Backend: https` and hit Debug. 
