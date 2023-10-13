@@ -99,3 +99,68 @@ This method gets the userinfo from the `PersistentComponentState` set by the bac
 <img width="600" alt="image" src="https://github.com/affableashish/blazorwasm-cookie-auth/assets/30603497/22b69c0f-6028-4ba3-ab4b-7631bdc6130f">
 
 This method gets called once when I navigate to this page. After that, it doesn't get called no matter how many times I come back to `/auth` page.
+
+## Enable SSO on a new app
+Let's login users to a new app after they have signed in with our Blazor WASM app.
+
+### Add a new app to the solution
+Note: This app should run on the same domain as our WASM app because cookie gets issued for a domain, `localhost` in this case.
+
+<img width="550" alt="image" src="https://github.com/affableashish/blazorwasm-cookie-auth/assets/30603497/d8341b31-a5b9-492d-898f-c5bbf5bc08b1">
+
+### Use data protection API to share cookies between applications
+
+#### Install Redis on macOs
+1. Follow this [guide](https://redis.io/docs/getting-started/installation/install-redis-on-mac-os/).
+
+When I tried this command, I got some errors:
+
+<img width="750" alt="image" src="https://github.com/affableashish/blazorwasm-cookie-auth/assets/30603497/79feea02-87f0-4fac-992b-03aba361f745">
+
+I fixed the errors by running:
+````
+sudo chown -R $(whoami) /usr/local/var
+````
+I then ran:
+````
+Ashishs-MacBook-Pro:blazorwasm-cookie-auth ashishkhanal$ brew install redis
+````
+And everything went well. 🎉
+
+2. Run Redis server
+   ````
+   brew services start redis
+   ````
+3. Connect to Redis
+   ````
+   redis-cli
+   ````
+4. Check for Keys which will be empty at this time
+   
+   <img width="650" alt="image" src="https://github.com/affableashish/blazorwasm-cookie-auth/assets/30603497/0cd4c1e2-cfd8-4550-8def-7f603049d93a">
+
+#### Install Nuget package that will allow you to persist keys to Redis
+Install this package on `BlazorWASM.Backend` and `BlazorServer` projects:
+
+<img width="850" alt="image" src="https://github.com/affableashish/blazorwasm-cookie-auth/assets/30603497/5a2605e3-8726-4c4a-9361-1e1dccb2a722">
+
+#### Setup connection to Redis
+1. Grab location of Redis
+   
+  <img width="250" alt="image" src="https://github.com/affableashish/blazorwasm-cookie-auth/assets/30603497/ce5c70e8-2474-4727-ae8c-05254bcb5604">
+
+2. Plug it in on `BlazorWASM.Backend` and `BlazorServer` projects
+   <img width="650" alt="image" src="https://github.com/affableashish/blazorwasm-cookie-auth/assets/30603497/0deef712-6479-4107-98dd-fb93a8e59788">
+
+#### Take it for a test drive
+1. Run both of the apps: `BlazorWASM.Backend` and `BlazorServer`.
+2. You should be able to see your key in Redis.
+   
+   <img width="300" alt="image" src="https://github.com/affableashish/blazorwasm-cookie-auth/assets/30603497/0abc3c02-cfb8-4aad-b8e6-cb5dac7c54a6">
+
+4. Login to your `BlazorWASM.Backend` app.
+   
+   <img width="450" alt="image" src="https://github.com/affableashish/blazorwasm-cookie-auth/assets/30603497/634eba7a-ecef-4117-9e26-631065d511d8">
+
+6. Go to your `BlazorServer` app's 'Auth Required' page and you should be able to view this page without any problem. 🎉
+   
