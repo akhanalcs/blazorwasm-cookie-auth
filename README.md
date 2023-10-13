@@ -64,4 +64,38 @@ Blazor WASM project that uses cookie authentication to authenticate users. It us
    <img width="650" alt="image" src="https://github.com/affableashish/blazorwasm-cookie-auth/assets/30603497/6d36574b-72b6-49a8-b1e0-a7cb2b2ccf38">
 
 ## View how the auth works
+This gets called when the app launches, or whenever you try navigating to any page.
+`BlazorWASM.Backend/Identity/PersistingServerAuthenticationStateProvider.cs`
 
+<img width="500" alt="image" src="https://github.com/affableashish/blazorwasm-cookie-auth/assets/30603497/7611a15a-3ee3-4554-9955-6a9ea950c4ab">
+
+Go to Login Page, provide credentials and hit login, LoginUser method gets called.
+`BlazorWASM.Backend/Components/Pages/Account/Login.razor`
+
+<img width="600" alt="image" src="https://github.com/affableashish/blazorwasm-cookie-auth/assets/30603497/7b62fe57-b946-4024-b4b6-4f5c34349d4a">
+
+After this method call completes, the cookie isn't set at this point.
+The Login page is still spinning:
+
+<img width="80" alt="image" src="https://github.com/affableashish/blazorwasm-cookie-auth/assets/30603497/dff3e7e1-0c01-45c5-a96c-6ae9a801c3f9">
+
+Now back to `PersistingServerAuthenticationStateProvider.OnPersistingAsync` method.
+
+<img width="450" alt="image" src="https://github.com/affableashish/blazorwasm-cookie-auth/assets/30603497/e600d45c-a9ae-4b20-8c08-42d8c33b533b">
+
+During this pass, `principal.Identity?.IsAuthenticated` is false and cookie is still not set.
+
+The control gets back to it right after, and at this time, the cookie is set and `principal.Identity?.IsAuthenticated` is true which will get the user persisted into `PersistentComponentState`.
+
+Now I navigate to the `auth` page, this gets called again:
+
+<img width="450" alt="image" src="https://github.com/affableashish/blazorwasm-cookie-auth/assets/30603497/a39b0a67-3634-4f7b-af99-53ca25863adb">
+
+And `GetAuthenticationStateAsync` method gets called in the `PersistentAuthenticationStateProvider.cs` file of `Frontend` project because it needs to call `AuthenticationStateProvider` to get `Name`. For eg:
+
+<img width="300" alt="image" src="https://github.com/affableashish/blazorwasm-cookie-auth/assets/30603497/1bce5cc7-a761-448c-967e-82a226e9c535">
+
+This method gets the userinfo from the `PersistentComponentState` set by the backend. **[I'm not sure how this is passed to the frontend.]**
+<img width="600" alt="image" src="https://github.com/affableashish/blazorwasm-cookie-auth/assets/30603497/22b69c0f-6028-4ba3-ab4b-7631bdc6130f">
+
+This method gets called once when I navigate to this page. After that, it doesn't get called no matter how many times I come back to `/auth` page.
