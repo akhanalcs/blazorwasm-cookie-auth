@@ -4,7 +4,7 @@ This repo contains 2 different projects:
 2. Blazor Web App that uses SignalR for interactivity and runs on the server (`BlazorServer.csproj`). Basically a Blazor Server App.
 
 `BlazorWASM.Backend` uses AspNetCore Identity with cookie authentication to sign in and manage users.
-`BlazorServer` just sits alongside to demostrate Single Sign On (SSO).
+`BlazorServer` just sits alongside to demonstrate Single Sign On (SSO).
 
 Any user who signs into `BlazorWASM.Backend` app gets automatically signed into `BlazorServer` app. Read on to see how it's done.
 
