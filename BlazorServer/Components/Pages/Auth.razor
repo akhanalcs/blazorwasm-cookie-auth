@@ -1,0 +1,14 @@
+﻿@* File I added 👇 *@
+
+@page "/auth"
+
+@attribute [Authorize]
+@attribute [RenderModeInteractiveServer]
+
+<PageTitle>Auth</PageTitle>
+
+<h1>You are authenticated</h1>
+
+<AuthorizeView>
+    Hello @context.User.Identity?.Name!
+</AuthorizeView>

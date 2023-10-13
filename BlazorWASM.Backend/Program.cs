@@ -6,12 +6,18 @@ using BlazorWASM.Frontend.Pages;
 using BlazorWASM.Backend.Components;
 using BlazorWASM.Backend.Data;
 using BlazorWASM.Backend.Identity;
+using Microsoft.AspNetCore.DataProtection;
+using StackExchange.Redis;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorComponents()
     .AddInteractiveWebAssemblyComponents();
+
+builder.Services.AddDataProtection()
+    .PersistKeysToStackExchangeRedis(ConnectionMultiplexer.Connect("127.0.0.1:6379"))
+    .SetApplicationName("my-sso-apps");
 
 builder.Services.AddCascadingAuthenticationState();
 builder.Services.AddScoped<UserAccessor>();
