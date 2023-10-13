@@ -1,5 +1,6 @@
 # blazorwasm-cookie-auth
 Blazor WASM project that uses cookie authentication to authenticate users. It uses `.NET 8 RC2`.
+It also demonstrates how to do Single Sign On (SSO) using Cookie Authentication.
 
 ## Create a project
 1. Create a new repo in Github.
@@ -163,4 +164,7 @@ Install this package on `BlazorWASM.Backend` and `BlazorServer` projects:
    <img width="450" alt="image" src="https://github.com/affableashish/blazorwasm-cookie-auth/assets/30603497/634eba7a-ecef-4117-9e26-631065d511d8">
 
 6. Go to your `BlazorServer` app's 'Auth Required' page and you should be able to view this page without any problem. 🎉
+
+   <img width="450" alt="image" src="https://github.com/affableashish/blazorwasm-cookie-auth/assets/30603497/ad687a37-25e6-43b5-8b63-5c519605be02">
+
    
