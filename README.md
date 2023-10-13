@@ -46,7 +46,7 @@ It also demonstrates how to do Single Sign On (SSO) using Cookie Authentication.
 ## Run the project
 1. Select the Profile `BlazorWASM.Backend: https` and hit Debug. 
 
-<img width="350" alt="image" src="https://github.com/affableashish/blazorwasm-cookie-auth/assets/30603497/12649d16-cf87-48cb-b466-c37e7fd8e320">
+   <img width="350" alt="image" src="https://github.com/affableashish/blazorwasm-cookie-auth/assets/30603497/12649d16-cf87-48cb-b466-c37e7fd8e320">
 
 2. Register an user.
    
