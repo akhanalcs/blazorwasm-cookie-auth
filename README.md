@@ -114,19 +114,19 @@ Note: This app should run on the same domain as our WASM app because cookie gets
 #### Install Redis on macOs
 1. Follow this [guide](https://redis.io/docs/getting-started/installation/install-redis-on-mac-os/).
 
-When I tried this command, I got some errors:
+   When I tried this command, I got some errors:
 
-<img width="750" alt="image" src="https://github.com/affableashish/blazorwasm-cookie-auth/assets/30603497/79feea02-87f0-4fac-992b-03aba361f745">
+   <img width="750" alt="image" src="https://github.com/affableashish/blazorwasm-cookie-auth/assets/30603497/79feea02-87f0-4fac-992b-03aba361f745">
 
-I fixed the errors by running:
-````
-sudo chown -R $(whoami) /usr/local/var
-````
-I then ran:
-````
-Ashishs-MacBook-Pro:blazorwasm-cookie-auth ashishkhanal$ brew install redis
-````
-And everything went well. 🎉
+   I fixed the errors by running:
+   ````
+   sudo chown -R $(whoami) /usr/local/var
+   ````
+   I then ran:
+   ````
+   Ashishs-MacBook-Pro:blazorwasm-cookie-auth ashishkhanal$ brew install redis
+   ````
+   And everything went well. 🎉
 
 2. Run Redis server
    ````
@@ -148,10 +148,31 @@ Install this package on `BlazorWASM.Backend` and `BlazorServer` projects:
 #### Setup connection to Redis
 1. Grab location of Redis
    
-  <img width="250" alt="image" src="https://github.com/affableashish/blazorwasm-cookie-auth/assets/30603497/ce5c70e8-2474-4727-ae8c-05254bcb5604">
+   <img width="250" alt="image" src="https://github.com/affableashish/blazorwasm-cookie-auth/assets/30603497/ce5c70e8-2474-4727-ae8c-05254bcb5604">
 
 2. Plug it in on `BlazorWASM.Backend` and `BlazorServer` projects
    <img width="650" alt="image" src="https://github.com/affableashish/blazorwasm-cookie-auth/assets/30603497/0deef712-6479-4107-98dd-fb93a8e59788">
+
+#### Configure `BlazorServer` app to read the same cookie issued by `BlazorWASM.Backend` app
+`_Imports.razor` changes:
+   
+<img width="400" alt="image" src="https://github.com/affableashish/blazorwasm-cookie-auth/assets/30603497/0f6e9193-a3e1-4870-b944-133e78439899">
+
+`Auth.razor` changes:
+   
+<img width="650" alt="image" src="https://github.com/affableashish/blazorwasm-cookie-auth/assets/30603497/c127bedf-04ac-4880-b327-1bebca95c92c">
+   
+`NavMenu.razor` changes:
+   
+<img width="450" alt="image" src="https://github.com/affableashish/blazorwasm-cookie-auth/assets/30603497/01762c86-4132-411e-8bfd-59855f9676e2">
+
+`Routes.razor` changes:
+   
+<img width="650" alt="image" src="https://github.com/affableashish/blazorwasm-cookie-auth/assets/30603497/fa3f338c-8e2e-44ba-8475-9cfe276deb79">
+
+`Program.cs` changes:
+   
+<img width="650" alt="image" src="https://github.com/affableashish/blazorwasm-cookie-auth/assets/30603497/8405d3aa-154a-4728-ae01-94a564e04259">
 
 #### Take it for a test drive
 1. Run both of the apps: `BlazorWASM.Backend` and `BlazorServer`.
