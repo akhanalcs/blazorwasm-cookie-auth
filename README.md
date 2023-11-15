@@ -8,6 +8,8 @@ This repo contains 2 different projects:
 
 Any user who signs into `BlazorWASM.Backend` app gets automatically signed into `BlazorServer` app. Read on to see how it's done.
 
+Also check out [this sample](https://github.com/dotnet/blazor-samples/tree/main/8.0/BlazorWebAssemblyStandaloneWithIdentity) for an example of standalone Blazor WASM with Identity. 
+
 ## Create a project
 1. Create a new repo in Github.
 2. Clone that into Rider.
