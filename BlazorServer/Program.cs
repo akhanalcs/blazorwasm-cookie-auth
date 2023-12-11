@@ -12,7 +12,18 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddCascadingAuthenticationState();
 builder.Services.AddAuthorization();
 builder.Services.AddAuthentication(IdentityConstants.ApplicationScheme)
-    .AddCookie(IdentityConstants.ApplicationScheme);
+    .AddCookie(IdentityConstants.ApplicationScheme, options =>
+    {/*
+        options.Events.OnRedirectToLogin = context =>
+        {
+            context.Response.StatusCode = 302;
+            context.Response.Headers["location"] = "https://localhost:7115/Account/Login";
+            //context.Response.Redirect(context.RedirectUri);
+            //context.RedirectUri = "https://localhost:7115/Account/Login";
+            return Task.CompletedTask;
+        };*/
+        //options.LoginPath = "https://localhost:7115/Account/Login";
+    });
 
 builder.Services.AddDataProtection()
     .PersistKeysToStackExchangeRedis(ConnectionMultiplexer.Connect("127.0.0.1:6379"))
